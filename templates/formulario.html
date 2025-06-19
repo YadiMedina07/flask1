@@ -3,17 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Clasificador de insectos</title>
+    <script>
+        // Función para limpiar el formulario
+        function limpiarFormulario() {
+            document.getElementById('abdomen').value = '';
+            document.getElementById('antena').value = '';
+        }
+    </script>
 </head>
 <body>
     <h1>Clasificador de insectos</h1>
     <form method="post">
         <label for="abdomen">Abdomen:</label>
-        <input type="number" step="any" name="abdomen" required><br><br>
+        <input type="number" step="any" name="abdomen" id="abdomen" value="{{ request.form['abdomen'] if request.method == 'POST' else '' }}" required><br><br>
 
         <label for="antena">Antena:</label>
-        <input type="number" step="any" name="antena" required><br><br>
+        <input type="number" step="any" name="antena" id="antena" value="{{ request.form['antena'] if request.method == 'POST' else '' }}" required><br><br>
 
         <button type="submit">Predecir</button>
+        <!-- Botón para limpiar el formulario -->
+        <button type="button" onclick="limpiarFormulario()">Limpiar</button>
     </form>
 
     {% if resultado %}
